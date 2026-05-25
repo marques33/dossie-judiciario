@@ -82,6 +82,8 @@ Poder Judiciário
 | 11 | Enunciados - FPPC (CPC/2015) | ✅ 658 registros (706 enunciados consolidados) |
 | 12 | Sumulas Vinculantes do STF | ✅ 62 registros (SV 1 a SV 62) |
 | 13 | Sumulas do STJ | ✅ 107 registros (601-676 completas + 31 classicas) |
+| 14 | Skills Claude Code (jurisprudencia + legislacao + sumulas/enunciados) | ✅ 3 skills em `skills/` |
+| 15 | Grafos Mermaid consolidados (jurisprudencia, legislacao federal/local, sumulas/enunciados, cruzamento leis-juris) | ✅ 5 novos grafos em `grafos/` |
 
 ## Totais
 
@@ -128,5 +130,42 @@ Poder Judiciário
 | Jurisprudencia Tematica | Decisoes emblematicas por area do direito | Pendente |
 | Legislacao Local | Legislacao estadual e municipal | Pendente |
 
+## Skills (Claude Code) — Fase 14
+
+Skills no padrão `~/.claude/skills/<nome>/SKILL.md` (frontmatter YAML + corpo) que ensinam o Claude a consultar o banco JSONL deste dossiê sem carregar os arquivos no contexto:
+
+| Skill | Cobertura | Registros |
+|---|---|---:|
+| `dossie-jurisprudencia-br` | 90 decisões emblemáticas STF/STJ/TST em 7 áreas + trilhas de overruling | 90 |
+| `dossie-legislacao-br` | Legislação federal (86) + local (81) — códigos, leis, ECs, CEs, LOMs | 167 |
+| `dossie-sumulas-enunciados-br` | Súmulas STF/STJ/TST/TSE + enunciados Jornadas/FONAJE/FPPC | 2.449 |
+
+Detalhes em [`skills/README.md`](skills/README.md).
+
+## Grafos — Fase 15 (5 novos)
+
+| Arquivo | Conteúdo |
+|---|---|
+| `grafos/mapa_jurisprudencia.md` | Árvore por área, trilhas de overruling, timeline, clusters tribunal×área, quadrant chart |
+| `grafos/mapa_legislacao_federal.md` | Constituição → códigos → leis especiais; ECs estruturantes; revogações; cobertura |
+| `grafos/mapa_legislacao_local.md` | CEs por região, LOMs das capitais, ICMS estadual, leis municipais paradigmáticas |
+| `grafos/mapa_sumulas_enunciados.md` | SV STF por área, Súmulas TST por matéria, Jornadas CC por edição, FPPC por bloco |
+| `grafos/cruzamento_leis_jurisprudencia.md` | Lei → leading case → súmula (trilhas tributária, penal, família, trabalhista) |
+
+Total da pasta `grafos/`: 16 arquivos (11 originais + 5 novos).
+
+## Auditoria — Fase 16 (25/05/2026)
+
+Auditoria estrutural completa em `scripts/audit_dossie.py`:
+
+- 95 arquivos JSONL · 4.434 linhas · 0 erros de parse · 0 mojibake
+- 4 inconsistências de leading_case corrigidas (Temas 6, 500 STF; 98, 106 STJ)
+- 1 Tema crítico adicionado (Tema 1234 STF — fluxos interfederativos saúde)
+- Entradas antigas preservadas em `teses_precedentes/temas_pendente_verificacao.jsonl`
+
+Detalhes em [`teses_precedentes/AUDIT.md`](teses_precedentes/AUDIT.md).
+
 ## Data de Referencia
 Dados coletados entre 12 e 14 de marco de 2026.
+Skills + grafos consolidados (Fases 14-15): 22 de maio de 2026.
+Auditoria de teses e repetitivos (Fase 16): 25 de maio de 2026.

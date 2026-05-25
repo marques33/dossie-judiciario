@@ -1,0 +1,7 @@
+# Artefatos gerados pelo pipeline de agregacao
+scripts/_agregado.json
+__pycache__/
+*.pyc
+
+# Relatorio gerado pela auditoria
+.audit_report.json
